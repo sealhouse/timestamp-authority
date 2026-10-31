@@ -1,0 +1,20 @@
+# sealhouse build of timestamp-server on Red Hat Hardened Images (Hummingbird).
+ARG BUILDER
+ARG RUNTIME
+
+FROM ${BUILDER} AS builder
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+COPY cmd/ cmd/
+COPY pkg/ pkg/
+ARG LDFLAGS=""
+RUN CGO_ENABLED=0 GOFIPS140=v1.26.0 go build -trimpath -ldflags "-buildid= ${LDFLAGS}" \
+      -o /out/usr/local/bin/timestamp-server ./cmd/timestamp-server
+# The server writes nothing at runtime; HOME (/tmp in core-runtime) is the only
+# writable path it may touch, so no extra directories are created here.
+
+FROM ${RUNTIME}
+COPY --from=builder /out/usr/local/bin/timestamp-server /usr/local/bin/timestamp-server
+ENTRYPOINT ["/usr/local/bin/timestamp-server"]
+CMD ["serve"]
