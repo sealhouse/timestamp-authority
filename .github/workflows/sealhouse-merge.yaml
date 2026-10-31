@@ -1,0 +1,19 @@
+name: sealhouse-merge
+
+on:
+  push:
+    branches: [rhtas/main, 'release-*']
+
+permissions: {}
+
+jobs:
+  merge:
+    permissions:
+      packages: write
+    uses: sealhouse/ci/.github/workflows/merge.yaml@56199c8ced4fab8cd2acf1800ea9fb73c5fb2bf1
+    with:
+      ci-ref: 56199c8ced4fab8cd2acf1800ea9fb73c5fb2bf1
+      image: true
+    secrets:
+      dispatch-app-id: ${{ secrets.SEALHOUSE_DISPATCH_APP_ID }}
+      dispatch-app-key: ${{ secrets.SEALHOUSE_DISPATCH_APP_KEY }}
