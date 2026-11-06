@@ -8,4 +8,4 @@ permissions: {}
 
 jobs:
   sync-merge-guard:
-    uses: sealhouse/ci/.github/workflows/sync-merge-guard.yaml@0921e2399d488dd3b68f112ab1b6c819387aec70
+    uses: sealhouse/ci/.github/workflows/sync-merge-guard.yaml@b1d5b917f99d991f75e4c97ed9ecb20d427d7fa8
