@@ -10,9 +10,9 @@ jobs:
   merge:
     permissions:
       packages: write
-    uses: sealhouse/ci/.github/workflows/merge.yaml@56199c8ced4fab8cd2acf1800ea9fb73c5fb2bf1
+    uses: sealhouse/ci/.github/workflows/merge.yaml@e8906322470ff2f37d20be64c9377f88546c1946
     with:
-      ci-ref: 56199c8ced4fab8cd2acf1800ea9fb73c5fb2bf1
+      ci-ref: e8906322470ff2f37d20be64c9377f88546c1946
       image: true
     secrets:
       dispatch-app-id: ${{ secrets.SEALHOUSE_DISPATCH_APP_ID }}
